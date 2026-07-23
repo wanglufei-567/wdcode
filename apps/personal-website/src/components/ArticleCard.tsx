@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import type { ArticleMeta } from '../content/articles'
+import { toNoteRoute } from '../notes/paths'
 import { ArticleCover } from './ArticleCover'
 
 interface ArticleCardProps {
@@ -15,7 +16,7 @@ interface ArticleCardProps {
 export function ArticleCard({ article }: ArticleCardProps) {
   return (
     <article className="article-card">
-      <Link className="article-card__link" to={`/articles/${article.slug}`}>
+      <Link className="article-card__link" to={toNoteRoute(article.sourcePath)}>
         <ArticleCover kind={article.coverKind} label={article.coverLabel} />
         <span className="article-card__body">
           <span>

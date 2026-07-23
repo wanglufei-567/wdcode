@@ -22,4 +22,30 @@ describe('normalizeNotebookMarkdown', () => {
 
     expect(normalizeNotebookMarkdown(markdown, 'Article title')).toBe('## Section\n\n```md\n### Code heading\n```')
   })
+
+  it('converts local HTML images to Markdown images', () => {
+    const markdown = '<img src="./00、课件/images/diagram.png" alt="架构图" />'
+
+    expect(normalizeNotebookMarkdown(markdown)).toBe(
+      '![架构图](<./00、课件/images/diagram.png>)',
+    )
+  })
+
+  it('converts multiline image-hosting tags and ignores presentation styles', () => {
+    const markdown = [
+      '<img',
+      '  src="https://raw.githubusercontent.com/example/image.png"',
+      '  alt="外部图片" style="zoom: 50%;" />',
+    ].join('\n')
+
+    expect(normalizeNotebookMarkdown(markdown)).toBe(
+      '![外部图片](<https://raw.githubusercontent.com/example/image.png>)',
+    )
+  })
+
+  it('preserves HTML image examples inside fenced code blocks', () => {
+    const markdown = '```html\n<img src="./example.png" alt="示例" />\n```'
+
+    expect(normalizeNotebookMarkdown(markdown)).toBe(markdown)
+  })
 })

@@ -9,13 +9,14 @@ COPY index.html tsconfig.json tsconfig.app.json tsconfig.node.json vite.config.t
 COPY public ./public
 COPY src ./src
 
-RUN find src/generated/articles -maxdepth 1 -type f -name '*.md' -print -quit | grep -q . \
-    && npm run build:prepared
+RUN npm run build
 
 FROM nginx:1.30.4-alpine AS runtime
 
 COPY config/nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /usr/share/nginx/html
+
+RUN mkdir -p /srv/notes
 
 EXPOSE 80
 

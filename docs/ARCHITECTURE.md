@@ -9,14 +9,18 @@
   apps/personal-website -> personal-web image
   external repositories -> external application images
 
+内容接入面
+  DebrisRecord Git -> managed checkout -> read-only mount
+
 部署控制面
-  infra -> image versions, runtime config, networks, volumes
+  infra -> builds, image versions, content paths, networks, volumes
 
 公网入口面
   Caddy :80/:443 -> runtime services
 ```
 
 - 应用生产面回答应用如何实现和构建
+- 内容接入面回答原始笔记如何进入个人站运行时
 - 部署控制面回答生产环境运行哪些镜像以及如何运行
 - 公网入口面回答请求进入哪个运行实例
 
@@ -27,37 +31,43 @@
 | 应用源码 | 对应应用仓库 | 构建流程 |
 | **Dockerfile** 和运行契约 | 对应应用仓库 | 构建流程、`infra` |
 | 不可变镜像 | 应用发布流程 | 生产 **Compose** |
+| 笔记原文和目录 | `DebrisRecord` | 个人站运行时 |
+| 内容检出路径 | `infra` | **Docker Compose**、个人站 |
 | 镜像版本和运行参数 | `infra` | **Docker Compose** |
 | 域名与路径路由 | `infra` | **Caddy** |
 | 运行实例 | **Docker Runtime** | **Caddy**、运维人员 |
 
-`infra` 消费镜像，不消费外部仓库内部文件结构
+`infra` 通过镜像契约接入外部应用，通过只读检出契约接入 `DebrisRecord`
 
 ### 三、Monorepo 内部边界
 
 ```text
 apps/personal-website
-  owns -> 页面、内容投影、前端行为、自身镜像
-  excludes -> 全局路由、外部应用部署、生产密钥
+  owns -> 页面、笔记路由、Markdown 阅读态、前端行为、自身镜像
+  excludes -> 笔记原文、全局路由、外部应用部署、生产密钥
 
 infra
-  owns -> 路由、镜像版本、网络、数据卷、部署控制
+  owns -> 内容检出、构建入口、路由、镜像版本、网络、数据卷、部署控制
   excludes -> 页面实现、基金业务逻辑、笔记原文
 ```
 
-两个目录通过镜像运行契约连接，不通过源代码导入形成反向依赖
+两个责任域通过镜像和挂载契约连接，不通过源码导入形成反向依赖
 
 ### 四、内容边界
 
 `DebrisRecord` 是学习笔记原文真值
 
-个人站维护精选清单，在构建期读取明确版本的 **Markdown**，生成可再生内容快照
+每台运行机器在 `content/debris-record` 中维护独立 **Git Checkout**
+
+个人站维护精选文章摘要和展示规则，正文、目录和图片始终从只读挂载的当前工作区读取
 
 ```text
-DebrisRecord Markdown
-  -> content sync
-  -> personal-website build input
-  -> personal-web image
+DebrisRecord Git
+  -> infra clone / pull
+  -> content/debris-record
+  -> Docker read-only mount
+  -> Nginx JSON directory / raw files
+  -> React notes UI / ReactMarkdown
 ```
 
 ### 五、运行时链路
@@ -69,10 +79,11 @@ Browser
   -> wdcode.cn:443
   -> Caddy terminates TLS
   -> personal-web:80
-  -> Nginx serves static files / SPA fallback
+  -> Nginx serves app files / note-content
+  -> React Router renders / or /notes/*
 ```
 
-个人站镜像内的 **Nginx** 不管理域名、证书或其他应用路由
+个人站镜像内的 **Nginx** 不管理域名、证书或其他应用路由，笔记目录通过 JSON Autoindex 提供，Markdown 和图片按需读取
 
 #### 5.2 基金观察台
 
@@ -92,21 +103,26 @@ Browser / Fund miniprogram
 ### 六、交付链路
 
 ```text
-application source
-  -> typecheck, test, build
+wdcode source on target host
+  -> typecheck, test, targeted image build
   -> immutable image
-  -> infra image reference
-  -> targeted service update
+  -> Compose targeted service update
   -> health checks
+
+DebrisRecord source
+  -> git pull
+  -> mounted files update
+  -> next request reads current content
 ```
 
-应用构建验证镜像本身，`infra` 发布验证镜像进入生产拓扑后的路由、数据和健康状态
+应用构建和内容更新相互独立，修改笔记不触发个人站镜像重建
 
 ### 七、数据与密钥
 
 - 持久化状态不写入容器可写层
 - 应用仓库声明容器路径和数据语义
 - `infra` 定义宿主机路径、挂载、备份和恢复方式
+- `DebrisRecord` 挂载为只读目录，不进入个人站镜像
 - **Caddy** 证书状态使用持久化卷
 - **Git** 只保存变量结构，不保存生产值
 
@@ -115,6 +131,7 @@ application source
 | 变化 | 默认动作 |
 |---|---|
 | 个人站页面变化 | 定向更新 `personal-web` |
+| 笔记正文或目录变化 | 更新 `content/debris-record`，不重建容器 |
 | 基金 Web 变化 | 定向更新 `fund-web` |
 | 基金 API 变化 | 定向更新 `fund-api` |
 | **Caddy** 路由变化 | 校验配置并受控重载 |

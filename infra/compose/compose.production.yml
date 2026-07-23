@@ -28,10 +28,14 @@ services:
       - web
 
   personal-web:
-    image: ${PERSONAL_WEB_IMAGE:?PERSONAL_WEB_IMAGE is required}
+    build:
+      context: ../../apps/personal-website
+    image: ${PERSONAL_WEB_IMAGE:-wdcode/personal-web:local}
     restart: unless-stopped
     expose:
       - "80"
+    volumes:
+      - ${DEBRIS_RECORD_PATH:?DEBRIS_RECORD_PATH is required}:/srv/notes:ro
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1/healthz"]
       interval: 30s

@@ -6,6 +6,8 @@
 Internet :80/:443
   -> Caddy
       -> wdcode.cn/*     -> personal-web:80
+           -> /notes/*        -> React reading routes
+           -> /note-content/* -> mounted DebrisRecord
       -> www.wdcode.cn/* -> https://wdcode.cn/*
       -> fund.wdcode.cn/* -> fund-web:80
            -> /api/*     -> fund-api:5174
@@ -27,6 +29,7 @@ Internet :80/:443
 | 公网入口 | `infra/caddy/Caddyfile` | HTTPS、主域名路由和 `www` 跳转 |
 | 生产编排 | `infra/compose/compose.production.yml` | 镜像、网络、健康检查和数据挂载 |
 | 环境模板 | `infra/.env.example` | 镜像引用和数据目录变量 |
+| 内容同步 | `infra/scripts/sync-debris-record.sh` | 初始化或更新当前机器的内容仓库 |
 
 ### 三、部署变量
 
@@ -36,21 +39,35 @@ Internet :80/:443
 | `FUND_WEB_IMAGE` | 基金 Web 网关不可变镜像引用 |
 | `FUND_API_IMAGE` | 基金 API 不可变镜像引用 |
 | `FUND_DATA_PATH` | 基金持久化数据的宿主机绝对目录 |
+| `DEBRIS_RECORD_PATH` | 当前机器上的 `DebrisRecord` 绝对路径 |
+| `DEBRIS_RECORD_REPOSITORY` | `DebrisRecord` 克隆地址 |
 
 生产 `.env` 不提交到 **Git**
 
-### 四、个人站镜像
+### 四、个人站与内容仓库
 
-构建前先同步精选文章：
+每台运行机器先检出 `wdcode`，再由统一脚本初始化或更新 `DebrisRecord`：
 
 ```bash
-cd apps/personal-website
-npm ci
-DEBRIS_RECORD_PATH=/workspace/DebrisRecord npm run content:sync
-docker build --platform linux/amd64 --tag wdcode/personal-web:<version> .
+./infra/scripts/sync-debris-record.sh
 ```
 
-运行镜像只包含 **Nginx** 和静态产物，容器内部监听 `80`，健康检查为 `GET /healthz`
+个人站镜像在当前机器定向构建：
+
+```bash
+docker compose \
+  --env-file infra/.env \
+  -f infra/compose/compose.production.yml \
+  build personal-web
+```
+
+运行镜像只包含 **Nginx** 和网站静态产物，`DebrisRecord` 通过只读挂载进入 `/srv/notes`
+
+笔记更新只执行 `git pull`，不重新构建个人站：
+
+```bash
+git -C content/debris-record pull --ff-only
+```
 
 ### 五、配置校验
 
@@ -74,7 +91,7 @@ docker run --rm \
 docker compose \
   --env-file infra/.env \
   -f infra/compose/compose.production.yml \
-  pull personal-web
+  build personal-web
 
 docker compose \
   --env-file infra/.env \
@@ -89,7 +106,11 @@ docker compose \
 个人站发布验证：
 
 - 首页返回 `200`
-- 正文深链接直接访问返回 `200`
+- `/notes` 返回完整一级目录
+- 笔记深链接直接访问返回 `200`
+- Markdown 以阅读态显示
+- 相对图片和内部 Markdown 链接正确
+- `.git` 和隐藏路径不能访问
 - `GET /healthz` 返回 `200`
 - 静态资源具有正确缓存策略
 - 桌面端和移动端没有水平溢出

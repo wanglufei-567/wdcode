@@ -4,15 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "content:sync": "node scripts/sync-content.mjs",
-    "predev": "npm run content:sync",
     "dev": "vite",
-    "prebuild": "npm run content:sync",
     "build": "tsc -b && vite build",
-    "build:prepared": "tsc -b && vite build",
     "typecheck": "tsc -b --pretty false",
     "test": "vitest run",
-    "verify": "npm run content:sync && npm run typecheck && npm run test && npm run build:prepared",
+    "verify": "npm run typecheck && npm run test && npm run build",
     "preview": "vite preview"
   },
   "dependencies": {

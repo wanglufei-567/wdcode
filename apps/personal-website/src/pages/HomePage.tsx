@@ -27,7 +27,7 @@ export function HomePage() {
         <section id="selected-articles" aria-label="精选文章">
           <div className="article-grid">
             {articles.map((article) => (
-              <ArticleCard article={article} key={article.slug} />
+              <ArticleCard article={article} key={article.sourcePath} />
             ))}
           </div>
         </section>

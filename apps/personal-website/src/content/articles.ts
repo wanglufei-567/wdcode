@@ -1,9 +1,14 @@
 import rawArticles from './articles.json'
 
-export type ArticleCoverKind = 'memory' | 'harness' | 'agent'
+export type ArticleCoverKind =
+  | 'architecture'
+  | 'routes'
+  | 'knowledge'
+  | 'memory'
+  | 'harness'
+  | 'agent'
 
 export interface ArticleMeta {
-  slug: string
   title: string
   summary: string
   sourcePath: string
@@ -11,7 +16,14 @@ export interface ArticleMeta {
   coverLabel: string
 }
 
-const coverKinds = new Set<ArticleCoverKind>(['memory', 'harness', 'agent'])
+const coverKinds = new Set<ArticleCoverKind>([
+  'architecture',
+  'routes',
+  'knowledge',
+  'memory',
+  'harness',
+  'agent',
+])
 
 /**
  * @description 把 JSON 清单校验为页面可消费的精选文章元数据，避免无效封面类型进入组件分支
@@ -31,12 +43,3 @@ function parseArticleMeta(article: (typeof rawArticles)[number], index: number):
 }
 
 export const articles: readonly ArticleMeta[] = rawArticles.map(parseArticleMeta)
-
-/**
- * @description 按公开路由 slug 查询精选文章，只在当前策展清单内返回结果
- * @param slug 路由中的文章标识
- * @returns 对应文章元数据，未收录时返回 undefined
- */
-export function getArticleBySlug(slug: string): ArticleMeta | undefined {
-  return articles.find((article) => article.slug === slug)
-}

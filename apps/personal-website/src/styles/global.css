@@ -106,13 +106,30 @@ a {
   text-decoration: none;
 }
 
-.site-purpose {
-  display: inline-flex;
+.site-nav {
+  display: flex;
   min-height: 44px;
   align-items: center;
-  gap: 9px;
+  gap: 6px;
+}
+
+.site-nav a {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border-radius: 4px;
   color: var(--color-muted);
   font-size: 13px;
+  font-weight: 550;
+  text-decoration: none;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  background: oklch(0.95 0.012 145);
+  color: var(--color-ink);
 }
 
 .site-purpose__dot {
@@ -194,9 +211,13 @@ a {
 
 .article-card__link:focus-visible,
 .site-brand:focus-visible,
+.site-nav a:focus-visible,
 .back-link:focus-visible,
 .not-found a:focus-visible,
-.markdown-body a:focus-visible {
+.markdown-body a:focus-visible,
+.note-breadcrumbs a:focus-visible,
+.note-entry-list a:focus-visible,
+.notes-sidebar a:focus-visible {
   outline: 2px solid var(--color-signal);
   outline-offset: 4px;
 }
@@ -212,6 +233,18 @@ a {
 }
 
 .article-cover--memory {
+  background: var(--color-cover-memory);
+}
+
+.article-cover--architecture {
+  background: var(--color-cover-harness);
+}
+
+.article-cover--routes {
+  background: var(--color-cover-agent);
+}
+
+.article-cover--knowledge {
   background: var(--color-cover-memory);
 }
 
@@ -456,6 +489,223 @@ a {
   border-top: 1px solid var(--color-line);
 }
 
+.markdown-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 32px auto;
+  border-radius: 4px;
+}
+
+.page-shell--notes {
+  --notes-sidebar-width: 244px;
+}
+
+.notes-layout {
+  display: grid;
+  grid-template-columns: var(--notes-sidebar-width) minmax(0, 1fr);
+  gap: clamp(40px, 6vw, 76px);
+  align-items: start;
+  padding-top: 42px;
+}
+
+.notes-sidebar {
+  position: sticky;
+  top: 28px;
+  max-height: calc(100vh - 56px);
+  overflow-y: auto;
+  padding-right: 18px;
+}
+
+.notes-sidebar__heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.notes-sidebar__heading p {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.notes-sidebar__heading a {
+  color: var(--color-signal-dark);
+  font-size: 12px;
+  text-underline-offset: 3px;
+}
+
+.notes-sidebar__status {
+  margin: 18px 0 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.notes-sidebar__list,
+.note-entry-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.notes-sidebar__list li {
+  border-bottom: 1px solid var(--color-line);
+}
+
+.notes-sidebar__list a {
+  display: flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--color-body);
+  font-size: 13px;
+  line-height: 1.45;
+  text-decoration: none;
+}
+
+.notes-sidebar__list a:hover {
+  color: var(--color-signal-dark);
+}
+
+.notes-sidebar__list a span:last-child {
+  flex: 0 0 auto;
+  color: var(--color-line-strong);
+}
+
+.notes-content {
+  width: min(100%, 800px);
+  min-width: 0;
+}
+
+.note-breadcrumbs {
+  display: flex;
+  min-height: 36px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.note-breadcrumbs > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.note-breadcrumbs a {
+  color: var(--color-signal-dark);
+  text-underline-offset: 3px;
+}
+
+.notes-directory-header,
+.note-reader-header {
+  padding: 42px 0 34px;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.notes-directory-header > p,
+.note-reader-header > p {
+  margin: 0 0 14px;
+  color: var(--color-signal-dark);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.notes-directory-header h1,
+.note-reader-header h1 {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: clamp(34px, 5vw, 52px);
+  font-weight: 620;
+  letter-spacing: -0.035em;
+  line-height: 1.16;
+  text-wrap: balance;
+}
+
+.notes-directory-header > span {
+  display: block;
+  margin-top: 18px;
+  color: var(--color-body);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.note-entry-list {
+  padding-top: 20px;
+}
+
+.note-entry-list li {
+  border-bottom: 1px solid var(--color-line);
+}
+
+.note-entry-list a {
+  display: grid;
+  min-height: 66px;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  color: var(--color-ink);
+  text-decoration: none;
+  transition: color 160ms cubic-bezier(0.22, 1, 0.36, 1), padding 160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.note-entry-list a:hover {
+  padding-left: 6px;
+  color: var(--color-signal-dark);
+}
+
+.note-entry-list__kind {
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.note-entry-list__name {
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 560;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.note-entry-list__action {
+  color: var(--color-muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.note-reader-status,
+.notes-empty {
+  margin: 0;
+  padding: 36px 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.note-reader-status--error h1,
+.note-reader-status--error h2 {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: 24px;
+  line-height: 1.35;
+}
+
+.note-reader-status--error p {
+  margin: 12px 0 0;
+}
+
 .not-found {
   width: min(680px, 100%);
   padding: clamp(84px, 14vw, 160px) 0;
@@ -498,7 +748,12 @@ a {
     padding-top: 20px;
   }
 
-  .site-purpose {
+  .site-nav {
+    gap: 2px;
+  }
+
+  .site-nav a {
+    padding: 0 9px;
     font-size: 12px;
   }
 
@@ -562,6 +817,35 @@ a {
   .markdown-body h3 {
     margin-top: 40px;
     font-size: 22px;
+  }
+
+  .notes-layout {
+    display: block;
+    padding-top: 30px;
+  }
+
+  .notes-sidebar {
+    display: none;
+  }
+
+  .notes-directory-header,
+  .note-reader-header {
+    padding: 34px 0 30px;
+  }
+
+  .notes-directory-header h1,
+  .note-reader-header h1 {
+    font-size: clamp(32px, 9vw, 42px);
+  }
+
+  .note-entry-list a {
+    min-height: 62px;
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .note-entry-list__action {
+    display: none;
   }
 }
 

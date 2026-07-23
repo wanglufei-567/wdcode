@@ -23,8 +23,10 @@ infra
 
 - 使用 **React**、**TypeScript**、**Vite** 和 **React Router**
 - 首页展示个人介绍和精选文章
-- 正文由 `DebrisRecord` 中明确选择的 **Markdown** 文件生成
-- 运行镜像使用 **Nginx** 提供静态文件、健康检查和 **SPA** 回退
+- `/notes/*` 按 `DebrisRecord` 目录展示全部 **Markdown** 笔记
+- 精选文章直接进入完整笔记页中的对应路径
+- 运行镜像使用 **Nginx** 提供静态文件、笔记目录、原文读取、健康检查和 **SPA** 回退
+- `DebrisRecord` 在每台运行机器独立检出，并以只读目录挂载给个人站
 - `https://wdcode.cn/` 是个人站默认入口
 
 ### 三、目录
@@ -37,9 +39,13 @@ wdcode/
       docs/DESIGN.md
       docs/SPEC.md
       Dockerfile
+  content/
+    debris-record/
+      -> 独立 Git Checkout，不进入 wdcode Git 历史
   infra/
     caddy/Caddyfile
     compose/compose.production.yml
+    scripts/sync-debris-record.sh
     docs/SPEC.md
   docs/
     ARCHITECTURE.md

@@ -13,8 +13,8 @@ export function NotFoundPage() {
       <main className="not-found">
         <p className="not-found__code">404</p>
         <h1>这里没有可阅读的内容</h1>
-        <p>文章可能尚未被选入个人站，或者当前链接已经失效</p>
-        <Link to="/">返回精选文章</Link>
+        <p>当前页面或笔记路径不存在，请返回首页或从完整笔记目录重新进入</p>
+        <Link to="/notes">返回笔记目录</Link>
       </main>
     </div>
   )
