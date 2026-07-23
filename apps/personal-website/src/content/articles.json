@@ -1,44 +1,145 @@
-[
-  {
-    "title": "Hermes 认知模型与架构全景",
-    "summary": "沿运行、存续、闭环、沉淀与协作的复杂度演进，串联 Runtime、Profile、Memory、Skills 与多 Agent 机制的责任边界",
-    "sourcePath": "19、AI 相关/03、AI 框架相关/Hermes/01、Hermes 认知模型与架构全景.md",
-    "coverKind": "architecture",
-    "coverLabel": "HERMES"
-  },
-  {
-    "title": "Agent 开发的四种主流路线",
-    "summary": "比较原生 API、厂商 Agent SDK、代码编排框架与 Runtime 扩展四条路线，判断控制权、工程成本和适用边界",
-    "sourcePath": "19、AI 相关/03、AI 框架相关/Agent开发三种路线对比.md",
-    "coverKind": "routes",
-    "coverLabel": "ROUTES"
-  },
-  {
-    "title": "知识库架构设计方法论",
-    "summary": "从包含、并列与正交关系出发，用单轴漏斗、Facet 和裁决规则把自然语言收敛为稳定、可执行的知识结构",
-    "sourcePath": "19、AI 相关/05、AI 知识库相关/01、业务裁决型知识库/02、知识库架构设计方法论.md",
-    "coverKind": "knowledge",
-    "coverLabel": "KNOWLEDGE"
-  },
-  {
-    "title": "Agent Memory 不治理会发生什么",
-    "summary": "从 Storage、Memory 与 Context 的边界出发，理解历史信息如何重新进入推理链，并持续影响 Agent 的判断和行动",
-    "sourcePath": "19、AI 相关/01、AI 概念&技术/09、Agent Memory 相关.md",
-    "coverKind": "memory",
-    "coverLabel": "MEMORY"
-  },
-  {
-    "title": "Harness Engineering",
-    "summary": "理解包裹在模型外部的上下文、工具、权限、验证与反馈系统，以及它如何把 Agent 行为纳入工程闭环",
-    "sourcePath": "19、AI 相关/01、AI 概念&技术/05、Harness Engineering 相关.md",
-    "coverKind": "harness",
-    "coverLabel": "HARNESS"
-  },
-  {
-    "title": "从 Chat AI 到 Agent",
-    "summary": "沿着记忆、工具与控制循环的演进路线，区分 LLM、Agent、Tool、Runtime、Sandbox 与 Process",
-    "sourcePath": "19、AI 相关/01、AI 概念&技术/06、Agent 演进全貌.md",
-    "coverKind": "agent",
-    "coverLabel": "AGENT"
-  }
-]
+{
+  "sections": [
+    {
+      "id": "ai",
+      "title": "AI",
+      "summary": "理解 Agent、Runtime、Memory、Harness 与知识库背后的责任边界和运行机制",
+      "sourcePath": "19、AI 相关",
+      "layout": "featured",
+      "articles": [
+        {
+          "title": "Hermes 认知模型与架构全景",
+          "summary": "从认知模型出发，完整拆解 Hermes 的架构与运行机制：Agent 如何规划与行动，Runtime 如何调度与执行，Memory 如何分层与检索，知识库如何支撑高质量回答，工具如何安全接入。厘清各组件的边界、交互与可验证性，建立端到端的心智模型。",
+          "sourcePath": "19、AI 相关/03、AI 框架相关/Hermes/01、Hermes 认知模型与架构全景.md",
+          "coverKind": "architecture",
+          "coverLabel": "HERMES"
+        },
+        {
+          "title": "Agent 开发的四种主流路线",
+          "summary": "对比四类主流 Agent 实现路径的权衡与适用场景，帮你选择合适的起点与演进策略。",
+          "sourcePath": "19、AI 相关/03、AI 框架相关/Agent开发三种路线对比.md",
+          "coverKind": "routes",
+          "coverLabel": "ROUTES"
+        },
+        {
+          "title": "知识库架构设计方法论",
+          "summary": "从数据接入、分块、索引到检索与评估，构建可演进、可维护、可验证的知识库系统。",
+          "sourcePath": "19、AI 相关/05、AI 知识库相关/01、业务裁决型知识库/02、知识库架构设计方法论.md",
+          "coverKind": "knowledge",
+          "coverLabel": "KNOWLEDGE"
+        },
+        {
+          "title": "Agent Memory 不治理会发生什么",
+          "summary": "深入探讨记忆的漂移、污染与成本失控，以及治理的关键抓手与落地实践。",
+          "sourcePath": "19、AI 相关/01、AI 概念&技术/09、Agent Memory 相关.md",
+          "coverKind": "memory",
+          "coverLabel": "MEMORY"
+        },
+        {
+          "title": "Harness Engineering",
+          "summary": "如何构建稳定、可重复的评测与回归体系，让你的 Agent 真正可交付。",
+          "sourcePath": "19、AI 相关/01、AI 概念&技术/05、Harness Engineering 相关.md",
+          "coverKind": "harness",
+          "coverLabel": "HARNESS"
+        },
+        {
+          "title": "从 Chat AI 到 Agent",
+          "summary": "拆解从对话到行动的关键跃迁：能力、接口、评测与产品形态的变化。",
+          "sourcePath": "19、AI 相关/01、AI 概念&技术/06、Agent 演进全貌.md",
+          "coverKind": "agent",
+          "coverLabel": "AGENT"
+        }
+      ]
+    },
+    {
+      "id": "react",
+      "title": "React",
+      "summary": "理解 React 的内部机制与性能细节，写出更可预测的复杂前端应用",
+      "sourcePath": "05、React相关",
+      "layout": "grid",
+      "articles": [
+        {
+          "title": "React 源码的架构设计",
+          "summary": "从 reconciler、renderer 与 scheduler 的包边界出发，理解 React 源码如何组织渲染能力和两类工作循环",
+          "sourcePath": "05、React相关/03、React18源码剖析/React 源码的架构设计 .md",
+          "coverKind": "reactArchitecture",
+          "coverLabel": "ARCHITECTURE"
+        },
+        {
+          "title": "理解 Fiber",
+          "summary": "从链表与树遍历进入 Fiber 数据结构，理解它如何把不可中断的递归渲染拆成可调度工作单元",
+          "sourcePath": "05、React相关/03、React18源码剖析/04、理解fiber.md",
+          "coverKind": "fiber",
+          "coverLabel": "FIBER"
+        },
+        {
+          "title": "React 中的 Lane 模型",
+          "summary": "沿优先级位模型、初次渲染与任务选择机制，理解 Lane 如何协调同步更新、并发渲染和饥饿处理",
+          "sourcePath": "05、React相关/03、React18源码剖析/16、React中的Lane模型.md",
+          "coverKind": "lanes",
+          "coverLabel": "LANES"
+        }
+      ]
+    },
+    {
+      "id": "javascript",
+      "title": "JavaScript",
+      "summary": "沿异步控制、执行队列和渲染时机，理解 JavaScript 的真实运行过程",
+      "sourcePath": "03、JavaScript相关",
+      "layout": "grid",
+      "articles": [
+        {
+          "title": "Promise 原理",
+          "summary": "从状态转换、then 链和 Promise/A+ 规范出发，逐步实现异步结果的传递、组合与错误处理",
+          "sourcePath": "03、JavaScript相关/02、JavaScript进阶/04、Promise原理.md",
+          "coverKind": "promise",
+          "coverLabel": "PROMISE"
+        },
+        {
+          "title": "async / await 原理",
+          "summary": "沿 Iterator、Generator、Promise 与协程的关系，理解 async / await 如何把异步控制流写成同步结构",
+          "sourcePath": "03、JavaScript相关/02、JavaScript进阶/05、async await原理.md",
+          "coverKind": "async",
+          "coverLabel": "ASYNC"
+        },
+        {
+          "title": "浏览器事件循环与重绘",
+          "summary": "串联任务队列、微任务、渲染流水线与动画帧，理解 JavaScript 执行和页面绘制如何协调",
+          "sourcePath": "03、JavaScript相关/03、其他/浏览器事件循环与重绘.md",
+          "coverKind": "eventLoop",
+          "coverLabel": "EVENT LOOP"
+        }
+      ]
+    },
+    {
+      "id": "engineering",
+      "title": "工程化",
+      "summary": "从构建流程、模块加载和跨应用协作理解前端工程系统",
+      "sourcePath": "09、前端工程化相关",
+      "layout": "grid",
+      "articles": [
+        {
+          "title": "webpack 的工作流",
+          "summary": "从 Compiler、Compilation、Module Graph 与产物生成出发，拆解 webpack 从入口到 bundle 的完整构建链路",
+          "sourcePath": "09、前端工程化相关/01、webpack相关/04、webpack的工作流.md",
+          "coverKind": "webpack",
+          "coverLabel": "WEBPACK"
+        },
+        {
+          "title": "Module Federation",
+          "summary": "理解 Host、Remote、Shared 与运行时容器如何协作，以及跨应用依赖共享和版本选择的边界",
+          "sourcePath": "09、前端工程化相关/01、webpack相关/06、module federation.md",
+          "coverKind": "federation",
+          "coverLabel": "FEDERATION"
+        },
+        {
+          "title": "实现 Rollup 基础功能",
+          "summary": "沿模块解析、AST 转换、依赖图与代码生成，实现一个最小 Rollup，理解打包器的核心机制",
+          "sourcePath": "09、前端工程化相关/02、rollup 相关/03、实现 rollup 基础功能.md",
+          "coverKind": "rollup",
+          "coverLabel": "ROLLUP"
+        }
+      ]
+    }
+  ]
+}
