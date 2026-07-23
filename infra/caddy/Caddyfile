@@ -1,0 +1,23 @@
+(common) {
+	encode zstd gzip
+
+	header {
+		-Server
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+	}
+}
+
+wdcode.cn {
+	import common
+	reverse_proxy personal-web:80
+}
+
+www.wdcode.cn {
+	redir https://wdcode.cn{uri} permanent
+}
+
+fund.wdcode.cn {
+	import common
+	reverse_proxy fund-web:80
+}

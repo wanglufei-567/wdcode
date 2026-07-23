@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "agent-memory-governance",
+    "title": "Agent Memory 不治理会发生什么",
+    "summary": "从 Storage、Memory 与 Context 的边界出发，理解历史信息如何重新进入推理链，并持续影响 Agent 的判断和行动",
+    "sourcePath": "19、AI 相关/01、AI 概念&技术/09、Agent Memory 相关.md",
+    "coverKind": "memory",
+    "coverLabel": "MEMORY"
+  },
+  {
+    "slug": "harness-engineering",
+    "title": "Harness Engineering",
+    "summary": "理解包裹在模型外部的上下文、工具、权限、验证与反馈系统，以及它如何把 Agent 行为纳入工程闭环",
+    "sourcePath": "19、AI 相关/01、AI 概念&技术/05、Harness Engineering 相关.md",
+    "coverKind": "harness",
+    "coverLabel": "HARNESS"
+  },
+  {
+    "slug": "from-chat-ai-to-agent",
+    "title": "从 Chat AI 到 Agent",
+    "summary": "沿着记忆、工具与控制循环的演进路线，区分 LLM、Agent、Tool、Runtime、Sandbox 与 Process",
+    "sourcePath": "19、AI 相关/01、AI 概念&技术/06、Agent 演进全貌.md",
+    "coverKind": "agent",
+    "coverLabel": "AGENT"
+  }
+]
