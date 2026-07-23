@@ -69,7 +69,25 @@ docker compose \
 git -C content/debris-record pull --ff-only
 ```
 
-### 五、配置校验
+### 五、发布前检查
+
+普通文章、首页、样式和组件变更只执行低成本检查，不构建 **Docker** 镜像：
+
+```bash
+cd apps/personal-website
+npm run release:check
+```
+
+该命令执行类型检查、测试、静态构建和 **Git** 差异格式检查
+
+只有修改 `Dockerfile`、**Nginx**、内容卷、健康检查、基础镜像、目标平台或生产编排时，才执行完整运行时检查：
+
+```bash
+cd apps/personal-website
+npm run release:check:runtime
+```
+
+运行时检查使用固定的 `wdcode/personal-web:runtime-check` 标签，验证结束后自动删除测试容器和镜像，不保留 `<none>` 镜像
 
 ```bash
 docker compose \
