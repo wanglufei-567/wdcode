@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 
+import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
 import { NoteBreadcrumbs } from '../notes/NoteBreadcrumbs'
 import { NoteDirectoryList } from '../notes/NoteDirectoryList'
@@ -64,6 +65,7 @@ export function NotesPage() {
           )}
         </main>
       </div>
+      <SiteFooter />
     </div>
   )
 }

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { ArticleCard } from '../components/ArticleCard'
 import type { ArticleCardVariant } from '../components/ArticleCard'
 import { HeroMechanism } from '../components/HeroMechanism'
+import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
 import { articleSections } from '../content/articles'
 import type { ArticleSectionLayout } from '../content/articles'
@@ -116,6 +117,7 @@ export function HomePage() {
           </div>
         </section>
       </main>
+      <SiteFooter />
     </div>
   )
 }

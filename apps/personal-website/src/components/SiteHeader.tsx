@@ -7,8 +7,9 @@ import { Link, NavLink } from 'react-router-dom'
 export function SiteHeader() {
   return (
     <header className="site-header">
-      <Link className="site-brand" to="/" aria-label="返回 WD Code 首页">
-        WD CODE
+      <Link className="site-brand" to="/" aria-label="返回编程实践笔记首页">
+        <span className="site-brand__name">编程实践笔记</span>
+        <span className="site-brand__alias" aria-hidden="true">WD CODE</span>
       </Link>
       <nav className="site-nav" aria-label="站点导航">
         <NavLink to="/" end>首页</NavLink>

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 
+import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
 
 /**
@@ -16,6 +17,7 @@ export function NotFoundPage() {
         <p>当前页面或笔记路径不存在，请返回首页或从完整笔记目录重新进入</p>
         <Link to="/notes">返回笔记目录</Link>
       </main>
+      <SiteFooter />
     </div>
   )
 }
