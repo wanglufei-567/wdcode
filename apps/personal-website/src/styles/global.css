@@ -189,6 +189,19 @@ a {
   color: var(--color-signal-dark);
 }
 
+.site-footer__public-security-record {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.site-footer__public-security-record img {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 20px;
+}
+
 .home-hero {
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
