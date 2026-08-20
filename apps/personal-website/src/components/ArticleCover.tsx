@@ -138,16 +138,25 @@ export function ArticleCover({ kind }: ArticleCoverProps) {
         </svg>
       )}
 
-      {kind === 'agent' && (
+      {kind === 'loop' && (
         <svg viewBox="0 0 240 180" role="presentation">
-          <path d="M28 28h88a10 10 0 0 1 10 10v46a10 10 0 0 1-10 10H70l-22 18V94H28a10 10 0 0 1-10-10V38a10 10 0 0 1 10-10Z" />
-          <circle cx="48" cy="56" r="8" className="article-cover__fill" />
-          <path d="M106 88h94a10 10 0 0 1 10 10v42a10 10 0 0 1-10 10h-20v16l-20-16h-54a10 10 0 0 1-10-10V98a10 10 0 0 1 10-10Z" />
-          <path d="M24 126h54a10 10 0 0 1 10 10v20H34l-16 12v-32a10 10 0 0 1 10-10Z" />
-          <text x="84" y="61" textAnchor="middle">CHAT AI</text>
-          <text x="153" y="116" textAnchor="middle">AGENT</text>
-          <text x="153" y="131" textAnchor="middle">LOOP</text>
-          <text x="53" y="145" textAnchor="middle">TOOLS</text>
+          <defs>
+            <marker id="loop-arrow" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto">
+              <path d="M1 0l4 3-4 3" className="article-cover__marker" />
+            </marker>
+          </defs>
+          <rect x="18" y="34" width="54" height="28" rx="5" />
+          <rect x="93" y="34" width="54" height="28" rx="5" className="article-cover__fill--soft" />
+          <rect x="168" y="34" width="54" height="28" rx="5" />
+          <rect x="87" y="118" width="66" height="28" rx="5" />
+          <path d="M72 48h21M147 48h21" markerEnd="url(#loop-arrow)" />
+          <path d="M195 62v22q0 18-18 18h-39q-18 0-18 16" markerEnd="url(#loop-arrow)" />
+          <path d="M87 132H46q-18 0-18-18V80q0-18 18-18" className="article-cover__dash" markerEnd="url(#loop-arrow)" />
+          <text x="45" y="52" textAnchor="middle">EVENT</text>
+          <text x="120" y="52" textAnchor="middle">AGENT</text>
+          <text x="195" y="52" textAnchor="middle">VERIFY</text>
+          <text x="120" y="136" textAnchor="middle">IMPROVE</text>
+          <text x="120" y="91" textAnchor="middle" className="article-cover__pointer-label">OUTCOME</text>
         </svg>
       )}
 

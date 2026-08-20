@@ -43,11 +43,11 @@
           "coverLabel": "HARNESS"
         },
         {
-          "title": "从 Chat AI 到 Agent",
-          "summary": "拆解从对话到行动的关键跃迁：能力、接口、评测与产品形态的变化。",
-          "sourcePath": "19、AI 相关/01、AI 概念&技术/06、Agent 演进全貌.md",
-          "coverKind": "agent",
-          "coverLabel": "AGENT"
+          "title": "Loop Engineering",
+          "summary": "拆解 Agent 系统的启动、执行、验收与改进闭环，理解 Harness 如何支撑不同时间尺度上的可靠运行与受控演进。",
+          "sourcePath": "19、AI 相关/01、AI 概念&技术/10、Loop Engineering 相关.md",
+          "coverKind": "loop",
+          "coverLabel": "LOOP"
         }
       ]
     },

@@ -6,7 +6,7 @@ export type ArticleCoverKind =
   | 'knowledge'
   | 'memory'
   | 'harness'
-  | 'agent'
+  | 'loop'
   | 'reactArchitecture'
   | 'fiber'
   | 'lanes'
@@ -43,7 +43,7 @@ const coverKinds = new Set<ArticleCoverKind>([
   'knowledge',
   'memory',
   'harness',
-  'agent',
+  'loop',
   'reactArchitecture',
   'fiber',
   'lanes',
