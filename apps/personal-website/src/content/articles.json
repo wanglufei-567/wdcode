@@ -24,7 +24,7 @@
         {
           "title": "知识库架构设计方法论",
           "summary": "从数据接入、分块、索引到检索与评估，构建可演进、可维护、可验证的知识库系统。",
-          "sourcePath": "19、AI 相关/05、AI 知识库相关/01、业务裁决型知识库/02、知识库架构设计方法论.md",
+          "sourcePath": "19、AI 相关/02、Agent Memory 相关/02、业务裁决型知识库/02、知识库架构设计方法论.md",
           "coverKind": "knowledge",
           "coverLabel": "KNOWLEDGE"
         },
