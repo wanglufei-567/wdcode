@@ -87,6 +87,16 @@ export function getNoteDirectoryPath(sourcePath: string): string {
 }
 
 /**
+ * @description 判断一个笔记路径是否等于指定目录，或位于该目录的下级层级
+ * @param directoryPath 作为范围边界的 DebrisRecord 相对目录
+ * @param sourcePath 当前目录或文章的 DebrisRecord 相对路径
+ * @returns 当前路径是否应让目录树中的该目录保持展开
+ */
+export function isNotePathWithin(directoryPath: string, sourcePath: string): boolean {
+  return sourcePath === directoryPath || sourcePath.startsWith(`${directoryPath}/`)
+}
+
+/**
  * @description 解析 Markdown 中相对于当前文章的路径，并阻止越过内容根目录
  * @param currentSourcePath 当前文章相对于 DebrisRecord 的路径
  * @param relativePath Markdown 链接或图片中的相对地址

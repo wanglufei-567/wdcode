@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import {
   getNoteDisplayName,
+  isNotePathWithin,
   resolveRelativeNotePath,
   toNoteContentUrl,
   toNoteDirectoryUrl,
@@ -31,6 +32,12 @@ describe('note paths', () => {
 
   it('rejects relative paths that escape the content root', () => {
     expect(resolveRelativeNotePath('根目录.md', '../private.md')).toBeUndefined()
+  })
+
+  it('identifies the active directory ancestry without matching similar prefixes', () => {
+    expect(isNotePathWithin('19、AI 相关', '19、AI 相关/01、AI 概念与技术/基础.md')).toBe(true)
+    expect(isNotePathWithin('19、AI 相关', '19、AI 相关')).toBe(true)
+    expect(isNotePathWithin('19、AI 相关', '19、AI 相关扩展/基础.md')).toBe(false)
   })
 
   it('removes Markdown extension from display names', () => {

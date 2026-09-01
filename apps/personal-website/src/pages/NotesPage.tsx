@@ -54,7 +54,7 @@ export function NotesPage() {
       <SiteHeader />
 
       <div className="notes-layout">
-        <NotesSidebar />
+        <NotesSidebar activeSourcePath={sourcePath} />
 
         <main id="notes-content" className="notes-content">
           <NoteBreadcrumbs sourcePath={sourcePath} />
