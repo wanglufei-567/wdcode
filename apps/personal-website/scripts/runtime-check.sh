@@ -10,6 +10,7 @@ IMAGE_NAME="wdcode/personal-web:runtime-check"
 CONTAINER_NAME="wdcode-personal-runtime-check"
 TARGET_PLATFORM="${RUNTIME_CHECK_PLATFORM:-linux/amd64}"
 CONTENT_DIR="${DEBRIS_RECORD_PATH:-$REPO_ROOT/content/debris-record}"
+HEALTH_WAIT_ATTEMPTS=75
 
 cleanup() {
   if docker container inspect "$CONTAINER_NAME" >/dev/null 2>&1; then
@@ -25,7 +26,7 @@ cleanup() {
 require_healthy_container() {
   local health_status=""
 
-  for _ in {1..30}; do
+  for ((attempt = 1; attempt <= HEALTH_WAIT_ATTEMPTS; attempt += 1)); do
     health_status="$(docker inspect --format '{{.State.Health.Status}}' "$CONTAINER_NAME")"
 
     if [[ "$health_status" == "healthy" ]]; then
