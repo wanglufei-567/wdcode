@@ -8,20 +8,28 @@ body:has(.work-case) {
   view-transition-name: works-site-header;
 }
 
-::view-transition-old(root),
-::view-transition-new(root),
 ::view-transition-group(works-site-header) {
   animation: none;
 }
 
-::view-transition-group(sql-editor-preview) {
-  animation-duration: 240ms;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+::view-transition-old(root) {
+  animation: works-page-out 100ms ease-in both;
 }
 
-::view-transition-group(flowlyte-preview) {
-  animation-duration: 240ms;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+::view-transition-new(root) {
+  animation: works-page-in 160ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes works-page-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes works-page-in {
+  from {
+    opacity: 0;
+  }
 }
 
 .works-index {
@@ -155,16 +163,6 @@ body:has(.work-case) {
   min-width: 0;
   margin: 0;
   contain: layout paint;
-}
-
-.work-feature__preview--sql-editor,
-.work-case__demo-stage {
-  view-transition-name: sql-editor-preview;
-}
-
-.work-feature__preview--flowlyte,
-.flowlyte-case__primary {
-  view-transition-name: flowlyte-preview;
 }
 
 .work-feature__preview img {
@@ -923,6 +921,11 @@ body:has(.work-case) {
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*) {
     animation-duration: 0.01ms !important;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
   }
 
   .work-button,
