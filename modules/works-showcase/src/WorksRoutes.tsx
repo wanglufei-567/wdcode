@@ -7,7 +7,7 @@ import { flowlyteWork } from './works/flowlyte/FlowlyteCasePage'
 import { sqlEditorWork } from './works/sql-editor/SqlEditorCasePage'
 import './works.css'
 
-const workRegistry = createWorkRegistry([sqlEditorWork, flowlyteWork, controlledContentAgentWork])
+const workRegistry = createWorkRegistry([controlledContentAgentWork, sqlEditorWork, flowlyteWork])
 
 function WorksIndexPage() {
   return (
