@@ -80,13 +80,6 @@ function ControlledContentAgentCasePage({ work }: { work: WorkDefinition }) {
           <h1 id="content-agent-title">{work.name}</h1>
           <p className="content-agent-case__lead">{work.summary}</p>
           <p className="content-agent-case__summary">{work.introduction}</p>
-          <dl className="content-agent-case__provenance">
-            <div><dt>案例范围</dt><dd>架构与运行机制</dd></div>
-            <div><dt>验证快照</dt><dd>b57e4eb · 2026-09-03</dd></div>
-          </dl>
-          <a className="work-button work-button--primary" href="#architecture">
-            阅读架构正文 <span aria-hidden="true">↓</span>
-          </a>
         </div>
 
         <figure className="content-agent-case__cover">

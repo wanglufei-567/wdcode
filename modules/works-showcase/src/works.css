@@ -449,36 +449,6 @@ body:has(.work-case) {
   text-wrap: pretty;
 }
 
-.content-agent-case__provenance {
-  max-width: 490px;
-  margin: 25px 0 22px;
-  border-block: 1px solid var(--color-line);
-}
-
-.content-agent-case__provenance > div {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 9px 0;
-}
-
-.content-agent-case__provenance > div + div {
-  border-top: 1px solid var(--color-line);
-}
-
-.content-agent-case__provenance dt {
-  color: var(--color-muted);
-  font-size: 11px;
-}
-
-.content-agent-case__provenance dd {
-  margin: 0;
-  color: var(--color-ink);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  text-align: right;
-}
-
 .content-agent-case__cover,
 .content-agent-case__architecture-figure,
 .content-agent-case__document-spread figure {
