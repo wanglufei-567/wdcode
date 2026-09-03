@@ -78,5 +78,6 @@ Caddy routes
 - 个人站通过 **Nginx JSON Autoindex** 读取目录，通过 `ReactMarkdown` 按需渲染原文
 - `SQLEditor` 提供独立维护的业务源码、自动化测试、构建与 **GitHub Pages** 演示，工程实践模块只保存展示投影
 - `Flowlyte` 提供独立维护的原生 macOS 源码、资源、测试、构建脚本与 **GitHub Release**，工程实践模块只保存展示投影
+- `受控内容生产 Agent` 的外部仓库提供知识库、执行编排、契约、门禁与架构文档，工程实践模块只保存匿名案例、经核验的架构图投影和网站专属业务链路封面
 - `fund-watchtower` 提供 Web 网关与 API 镜像及其端口、健康检查、环境变量和数据目录契约
 - `infra` 选择外部镜像版本，并定向构建 `wdcode` 自有应用
