@@ -6,7 +6,7 @@
 
 ```text
 应用生产面
-  apps/personal-website -> personal-web image
+  apps/personal-website + registered modules -> personal-web image
   external repositories -> external application images
 
 内容接入面
@@ -29,6 +29,8 @@
 | 对象 | 真值所有者 | 消费者 |
 |---|---|---|
 | 应用源码 | 对应应用仓库 | 构建流程 |
+| 站内业务模块源码 | `modules/*` | 个人站构建流程 |
+| 站点模块注册契约 | `packages/site-module-contract` | 主应用、站内业务模块 |
 | **Dockerfile** 和运行契约 | 对应应用仓库 | 构建流程、`infra` |
 | 不可变镜像 | 应用发布流程 | 生产 **Compose** |
 | 笔记原文和目录 | `DebrisRecord` | 个人站运行时 |
@@ -39,19 +41,39 @@
 
 `infra` 通过镜像契约接入外部应用，通过只读检出契约接入 `DebrisRecord`
 
-### 三、Monorepo 内部边界
+### 三、**Monorepo** 内部边界
 
 ```text
 apps/personal-website
-  owns -> 页面、笔记路由、Markdown 阅读态、前端行为、自身镜像
-  excludes -> 笔记原文、全局路由、外部应用部署、生产密钥
+  owns -> 站点壳、首页、公共导航、模块装配、自身镜像
+  excludes -> 笔记业务、作品案例内容、外部应用源码、生产密钥
+
+modules/notes
+  owns -> /notes/*、目录发现、Markdown 阅读态
+  excludes -> 站点壳、作品案例、部署逻辑
+
+modules/works-showcase
+  owns -> /works/*、工程实践项目注册、案例投影、演示入口
+  excludes -> 外部项目业务源码、站点壳、部署逻辑
+
+packages/site-module-contract
+  owns -> 导航、路由和公共 Chrome 注入契约
+  excludes -> 具体业务页面和部署逻辑
 
 infra
   owns -> 内容检出、构建入口、路由、镜像版本、网络、数据卷、部署控制
   excludes -> 页面实现、基金业务逻辑、笔记原文
 ```
 
-两个责任域通过镜像和挂载契约连接，不通过源码导入形成反向依赖
+主应用在构建时注册业务模块，模块只依赖稳定契约，不反向依赖主应用，也不直接依赖其他业务模块
+
+站内模块由主应用静态导入，代码和样式随同一入口完成加载；应用启动后的导航切换只执行内存路由匹配，不经过动态导入和异步挂载边界
+
+这一结构借鉴微前端的注册与隔离思想，但不引入独立运行时：所有站内模块共享一个 **React**、一个 **Router**、一个静态产物和一个 `personal-web` 镜像
+
+外部项目仍由各自仓库维护，工程实践模块只建立面向公开阅读的展示投影，不把外部源码纳入 `wdcode` 构建上下文
+
+外部在线演示的加载策略由对应作品适配器拥有，当前 `SQLEditor` 在案例详情中直接嵌入并默认加载 **iframe**，作品目录仍只加载静态截图，使外部资源成本只发生在进入具体案例之后，不并入个人站首页或作品目录首屏
 
 ### 四、内容边界
 
@@ -80,7 +102,7 @@ Browser
   -> Caddy terminates TLS
   -> personal-web:80
   -> Nginx serves app files / note-content
-  -> React Router renders / or /notes/*
+  -> React Router dispatches /, /notes/* or /works/*
 ```
 
 个人站镜像内的 **Nginx** 不管理域名、证书或其他应用路由，笔记目录通过 JSON Autoindex 提供，Markdown 和图片按需读取
@@ -130,7 +152,7 @@ DebrisRecord source
 
 | 变化 | 默认动作 |
 |---|---|
-| 个人站页面变化 | 定向更新 `personal-web` |
+| 个人站壳或站内模块变化 | 定向更新 `personal-web` |
 | 笔记正文或目录变化 | 更新 `content/debris-record`，不重建容器 |
 | 基金 Web 变化 | 定向更新 `fund-web` |
 | 基金 API 变化 | 定向更新 `fund-api` |

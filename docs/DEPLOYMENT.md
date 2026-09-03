@@ -7,6 +7,7 @@ Internet :80/:443
   -> Caddy
       -> wdcode.cn/*     -> personal-web:80
            -> /notes/*        -> React reading routes
+           -> /works/*        -> React project-case routes
            -> /note-content/* -> mounted DebrisRecord
       -> www.wdcode.cn/* -> https://wdcode.cn/*
       -> fund.wdcode.cn/* -> fund-web:80
@@ -61,7 +62,9 @@ docker compose \
   build personal-web
 ```
 
-运行镜像只包含 **Nginx** 和网站静态产物，`DebrisRecord` 通过只读挂载进入 `/srv/notes`
+构建上下文是 `wdcode` 根目录，主应用、站内模块和稳定契约共同生成一个静态产物
+
+运行镜像只包含 **Nginx** 和网站静态产物，站内模块不启动独立服务，`DebrisRecord` 通过只读挂载进入 `/srv/notes`
 
 笔记更新只执行 `git pull`，不重新构建个人站：
 
@@ -74,7 +77,6 @@ git -C content/debris-record pull --ff-only
 普通文章、首页、样式和组件变更只执行低成本检查，不构建 **Docker** 镜像：
 
 ```bash
-cd apps/personal-website
 npm run release:check
 ```
 
@@ -83,7 +85,6 @@ npm run release:check
 只有修改 `Dockerfile`、**Nginx**、内容卷、健康检查、基础镜像、目标平台或生产编排时，才执行完整运行时检查：
 
 ```bash
-cd apps/personal-website
 npm run release:check:runtime
 ```
 
@@ -125,6 +126,8 @@ docker compose \
 
 - 首页返回 `200`
 - `/notes` 返回完整一级目录
+- `/works` 返回工程实践目录，案例深链接直接访问返回 `200`
+- 外部项目链接指向对应仓库和在线演示
 - 笔记深链接直接访问返回 `200`
 - Markdown 以阅读态显示
 - 相对图片和内部 Markdown 链接正确
