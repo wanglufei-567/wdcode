@@ -38,6 +38,7 @@ function getArticleCardVariant(
 export function HomePage() {
   return (
     <div className="page-shell">
+      <title>编程实践笔记</title>
       <a className="skip-link" href="#selected-articles">跳到精选文章</a>
       <SiteHeader />
 

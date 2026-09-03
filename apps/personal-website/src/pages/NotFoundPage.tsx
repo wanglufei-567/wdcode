@@ -10,6 +10,7 @@ import { SiteHeader } from '../components/SiteHeader'
 export function NotFoundPage() {
   return (
     <div className="page-shell">
+      <title>页面不存在 · 编程实践笔记</title>
       <SiteHeader />
       <main className="not-found">
         <p className="not-found__code">404</p>

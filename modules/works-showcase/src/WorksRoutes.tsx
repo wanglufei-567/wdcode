@@ -51,9 +51,15 @@ export function WorksRoutes({ Header, Footer }: SiteChrome) {
   const workId = (params['*'] ?? '').replace(/^\/+|\/+$/g, '')
   const work = workId === '' ? undefined : workRegistry.findById(workId)
   const CasePage = work?.CasePage
+  const pageTitle = workId === ''
+    ? '工程实践 · 编程实践笔记'
+    : work
+      ? `${work.name} · 工程实践 · 编程实践笔记`
+      : '项目不存在 · 工程实践 · 编程实践笔记'
 
   return (
     <div className="page-shell">
+      <title>{pageTitle}</title>
       <a className="skip-link" href="#works-content">跳到工程实践内容</a>
       <Header />
       <div id="works-content">

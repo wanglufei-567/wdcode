@@ -47,9 +47,13 @@ export function NotesPage({ Header, Footer }: SiteChrome) {
   const params = useParams()
   const sourcePath = normalizeNoteRoutePath(params['*'] ?? '')
   const isMarkdown = /\.md$/i.test(sourcePath)
+  const pageTitle = sourcePath === ''
+    ? '全部笔记 · 编程实践笔记'
+    : `${getNoteDisplayName(sourcePath)} · 笔记 · 编程实践笔记`
 
   return (
     <div className="page-shell page-shell--notes">
+      <title>{pageTitle}</title>
       <a className="skip-link" href="#notes-content">跳到笔记内容</a>
       <Header />
 
