@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import type { WorkDefinition } from '../../workRegistry'
-import sqlEditorDemoPreview from './sql-editor-demo.png'
+import sqlEditorDemoPreview from './sql-editor-demo.avif'
 
 const SQL_EDITOR_REPOSITORY_URL = 'https://github.com/wanglufei-567/SQLEditor'
 const SQL_EDITOR_DEMO_URL = 'https://wanglufei-567.github.io/SQLEditor/'
