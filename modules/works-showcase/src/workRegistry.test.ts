@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { createWorkRegistry } from './workRegistry'
+import { controlledContentAgentWork } from './works/content-agent/ControlledContentAgentCasePage'
 import { flowlyteWork } from './works/flowlyte/FlowlyteCasePage'
 import { sqlEditorWork } from './works/sql-editor/SqlEditorCasePage'
 
@@ -53,5 +54,14 @@ describe('createWorkRegistry', () => {
     })
     expect(flowlyteWork.demoUrl).toBeUndefined()
     expect(flowlyteWork.technologies).toContain('AVFoundation')
+  })
+
+  it('受控内容生产 Agent 以匿名案例承载外部项目证据', () => {
+    expect(controlledContentAgentWork).toMatchObject({
+      id: 'content-agent',
+      name: '受控内容生产 Agent',
+    })
+    expect(controlledContentAgentWork.repositoryUrl).toBeUndefined()
+    expect(controlledContentAgentWork.technologies).toContain('JSON Schema')
   })
 })

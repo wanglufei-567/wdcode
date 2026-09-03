@@ -85,6 +85,7 @@ docker exec "$CONTAINER_NAME" wget --quiet --spider http://127.0.0.1/notes/regre
 docker exec "$CONTAINER_NAME" wget --quiet --spider http://127.0.0.1/works
 docker exec "$CONTAINER_NAME" wget --quiet --spider http://127.0.0.1/works/sql-editor
 docker exec "$CONTAINER_NAME" wget --quiet --spider http://127.0.0.1/works/flowlyte
+docker exec "$CONTAINER_NAME" wget --quiet --spider http://127.0.0.1/works/content-agent
 docker exec "$CONTAINER_NAME" wget --quiet --spider http://127.0.0.1/note-content/
 
 if docker exec "$CONTAINER_NAME" wget --quiet --spider http://127.0.0.1/note-content/.git/config 2>/dev/null; then

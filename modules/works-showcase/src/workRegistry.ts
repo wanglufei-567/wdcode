@@ -6,7 +6,7 @@ export interface WorkDefinition {
   summary: string
   introduction: string
   technologies: readonly string[]
-  repositoryUrl: string
+  repositoryUrl?: string
   demoUrl?: string
   IndexFeature: ComponentType<{ work: WorkDefinition }>
   CasePage: ComponentType<{ work: WorkDefinition }>
