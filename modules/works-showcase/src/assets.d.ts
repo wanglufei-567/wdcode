@@ -3,4 +3,9 @@ declare module '*.png' {
   export default source
 }
 
+declare module '*.avif' {
+  const source: string
+  export default source
+}
+
 declare module '*.css'

@@ -48,7 +48,7 @@ function SqlEditorIndexFeature({ work }: { work: WorkDefinition }) {
   return (
     <article className="work-feature">
       <div className="work-feature__body">
-        <figure className="work-feature__preview">
+        <figure className="work-feature__preview work-feature__preview--sql-editor">
           <img
             alt="SQLEditor 深色主题在线演示，显示 SQL 语法错误、高亮、格式化与方言切换界面"
             height="900"

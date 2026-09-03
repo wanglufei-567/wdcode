@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { createWorkRegistry } from './workRegistry'
+import { flowlyteWork } from './works/flowlyte/FlowlyteCasePage'
 import { sqlEditorWork } from './works/sql-editor/SqlEditorCasePage'
 
 const CasePage = () => null
@@ -43,5 +44,14 @@ describe('createWorkRegistry', () => {
       demoUrl: 'https://wanglufei-567.github.io/SQLEditor/',
     })
     expect(sqlEditorWork.technologies).toContain('CodeMirror 6')
+  })
+
+  it('Flowlyte 适配器保留公开仓库和原生应用技术边界', () => {
+    expect(flowlyteWork).toMatchObject({
+      id: 'flowlyte',
+      repositoryUrl: 'https://github.com/wanglufei-567/Flowlyte',
+    })
+    expect(flowlyteWork.demoUrl).toBeUndefined()
+    expect(flowlyteWork.technologies).toContain('AVFoundation')
   })
 })

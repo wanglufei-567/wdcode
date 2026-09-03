@@ -2,10 +2,11 @@ import type { SiteChrome } from '@wdcode/site-module-contract'
 import { Link, useParams } from 'react-router-dom'
 
 import { createWorkRegistry } from './workRegistry'
+import { flowlyteWork } from './works/flowlyte/FlowlyteCasePage'
 import { sqlEditorWork } from './works/sql-editor/SqlEditorCasePage'
 import './works.css'
 
-const workRegistry = createWorkRegistry([sqlEditorWork])
+const workRegistry = createWorkRegistry([sqlEditorWork, flowlyteWork])
 
 function WorksIndexPage() {
   return (
