@@ -169,7 +169,6 @@ body:has(.work-case) {
   display: block;
   width: 100%;
   height: auto;
-  border: 1px solid oklch(0.30 0.016 145);
   border-radius: 6px;
   background: oklch(0.15 0.012 145);
 }
