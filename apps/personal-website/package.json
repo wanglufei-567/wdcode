@@ -9,25 +9,26 @@
     "typecheck": "tsc -b --pretty false",
     "test": "vitest run",
     "verify": "npm run typecheck && npm run test && npm run build",
-    "release:check": "npm run verify && git diff --check",
+    "release:check": "npm run release:check --prefix ../..",
     "release:check:runtime": "npm run release:check && bash scripts/runtime-check.sh",
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "react-markdown": "^10.1.0",
-    "react-router-dom": "^7.18.1",
-    "remark-gfm": "^4.0.1"
+    "@wdcode/notes": "0.1.0",
+    "@wdcode/site-module-contract": "0.1.0",
+    "@wdcode/works-showcase": "0.1.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-router-dom": "7.18.3"
   },
   "devDependencies": {
-    "@types/node": "^26.1.1",
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.4",
-    "typescript": "^7.0.2",
-    "vite": "^8.1.5",
-    "vitest": "^4.1.10"
+    "@types/node": "26.1.1",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.4",
+    "typescript": "7.0.2",
+    "vite": "8.1.5",
+    "vitest": "4.1.10"
   },
   "engines": {
     "node": ">=22.0.0"

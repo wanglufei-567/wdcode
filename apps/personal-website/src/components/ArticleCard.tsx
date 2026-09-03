@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 
+import { toNoteRoute } from '@wdcode/notes'
+
 import type { ArticleMeta } from '../content/articles'
-import { toNoteRoute } from '../notes/paths'
 import { ArticleCover } from './ArticleCover'
 
 export type ArticleCardVariant = 'standard' | 'lead' | 'compact'

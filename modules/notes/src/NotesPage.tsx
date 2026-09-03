@@ -1,13 +1,13 @@
 import { useParams } from 'react-router-dom'
 
-import { SiteFooter } from '../components/SiteFooter'
-import { SiteHeader } from '../components/SiteHeader'
-import { NoteBreadcrumbs } from '../notes/NoteBreadcrumbs'
-import { NoteDirectoryList } from '../notes/NoteDirectoryList'
-import { MarkdownReader } from '../notes/MarkdownReader'
-import { NotesSidebar } from '../notes/NotesSidebar'
-import { getNoteDisplayName, normalizeNoteRoutePath } from '../notes/paths'
-import { useNoteDirectory } from '../notes/useNoteDirectory'
+import type { SiteChrome } from '@wdcode/site-module-contract'
+
+import { NoteBreadcrumbs } from './NoteBreadcrumbs'
+import { NoteDirectoryList } from './NoteDirectoryList'
+import { MarkdownReader } from './MarkdownReader'
+import { NotesSidebar } from './NotesSidebar'
+import { getNoteDisplayName, normalizeNoteRoutePath } from './paths'
+import { useNoteDirectory } from './useNoteDirectory'
 
 interface DirectoryReaderProps {
   sourcePath: string
@@ -43,7 +43,7 @@ function DirectoryReader({ sourcePath }: DirectoryReaderProps) {
  * @description 承载完整 DebrisRecord 目录和阅读态文章的 `/notes/*` 路由
  * @returns 根目录、子目录或 Markdown 阅读页
  */
-export function NotesPage() {
+export function NotesPage({ Header, Footer }: SiteChrome) {
   const params = useParams()
   const sourcePath = normalizeNoteRoutePath(params['*'] ?? '')
   const isMarkdown = /\.md$/i.test(sourcePath)
@@ -51,7 +51,7 @@ export function NotesPage() {
   return (
     <div className="page-shell page-shell--notes">
       <a className="skip-link" href="#notes-content">跳到笔记内容</a>
-      <SiteHeader />
+      <Header />
 
       <div className="notes-layout">
         <NotesSidebar activeSourcePath={sourcePath} />
@@ -65,7 +65,7 @@ export function NotesPage() {
           )}
         </main>
       </div>
-      <SiteFooter />
+      <Footer />
     </div>
   )
 }

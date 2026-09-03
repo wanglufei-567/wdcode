@@ -1,0 +1,35 @@
+{
+  "name": "wdcode",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "modules/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace @wdcode/personal-website",
+    "check:boundaries": "node scripts/check-module-boundaries.mjs",
+    "dev": "npm run dev --workspace @wdcode/personal-website --",
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "verify": "npm run check:boundaries && npm run typecheck && npm run test && npm run build",
+    "release:check": "npm run verify && git diff --check",
+    "release:check:runtime": "npm run release:check && bash apps/personal-website/scripts/runtime-check.sh"
+  },
+  "devDependencies": {
+    "@types/node": "26.1.1",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.4",
+    "typescript": "7.0.2",
+    "vite": "8.1.5",
+    "vitest": "4.1.10"
+  },
+  "overrides": {
+    "@types/react": "19.2.17"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

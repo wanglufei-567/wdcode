@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import ReactMarkdown, { type Components } from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
-import { normalizeNotebookMarkdown } from '../content/markdown'
+import { normalizeNotebookMarkdown } from './markdown'
 import { fetchNoteMarkdown } from './api'
 import {
   getNoteDisplayName,
