@@ -4,10 +4,12 @@ import type { WorkDefinition } from '../../workRegistry'
 import adjudicationLoop from './controlled-adjudication-loop.avif'
 import contentProductionOverview from './content-production-overview.avif'
 import executionStack from './controlled-execution-stack.avif'
+import facetedSingleAxisRouting from './faceted-single-axis-routing.avif'
 import productionAuthority from './controlled-production-authority.avif'
 
 const CASE_NAVIGATION = [
   ['architecture', '系统架构'],
+  ['routing', '路由裁决'],
   ['control-chain', '控制链路'],
   ['adjudication', '生产裁决'],
   ['governance', '知识治理'],
@@ -16,7 +18,7 @@ const CASE_NAVIGATION = [
 ] as const
 
 const STAGE_GROUPS = [
-  ['S01', '输入定界', 'RouteDecision 与 EvidencePack', '对象成立并复核后才进入研究阶段'],
+  ['S01', '路由与证据定界', 'RouteDecision 与 EvidencePack', '唯一有效 SKU 成立并复核后才进入研究阶段'],
   ['S02–S06 · H01', '研究与策略收敛', '候选、分析、策略与 PatternBrief', '研究对象通过首次人工节点后继续'],
   ['S07 · H02', '生产计划裁决', 'ContentPlan 与形成记录', '计划经人工确认后才允许生产'],
   ['S08–S11 · H03', '正文、视觉与治理', '双生产对象与 GateReport', '发布前门禁失败时回到责任阶段修复'],
@@ -121,6 +123,30 @@ function ControlledContentAgentCasePage({ work }: { work: WorkDefinition }) {
                 width="1920"
               />
               <figcaption>分层执行架构：语义判断进入确定性执行，并由状态和授权约束副作用</figcaption>
+            </figure>
+          </section>
+
+          <section className="work-case__section" id="routing" aria-labelledby="content-agent-routing-title">
+            <header className="work-section-heading">
+              <p>自然语言同时携带场景、人群、部位、分型和阶段，全部嵌入一棵树会造成组合爆炸与规则重复</p>
+              <h2 id="content-agent-routing-title">分面单轴漏斗把语义理解收敛为唯一可执行路由</h2>
+            </header>
+            <ol className="content-agent-case__routing-model" aria-label="分面单轴漏斗路由的裁决顺序">
+              <li><span>01</span><strong>scenario 场景主轴</strong><p>沿唯一层级轴下钻到最深有效场景，必要时按父级规则回退</p></li>
+              <li><span>02</span><strong>facet 横向收敛</strong><p>人群、部位、分型、阶段与症状保持平铺，在运行时相交约束</p></li>
+              <li><span>03</span><strong>资格硬闸</strong><p>先排除不满足人群和业务规则的候选，不让排序覆盖资格判断</p></li>
+              <li><span>04</span><strong>SKU 唯一裁决</strong><p>只在有效候选内选定一个 SKU，并将依据固化为 RouteDecision</p></li>
+            </ol>
+            <p className="content-agent-case__principle">scenario 管定位，facet 管收窄，硬闸管资格，SKU 管裁决</p>
+            <figure className="content-agent-case__routing-figure">
+              <img
+                alt="多轴嵌套树会产生组合爆炸，分面单轴模型只让场景纵向下钻，并将人群和疤痕分型作为平铺标签相交收敛到唯一 SKU"
+                height="1396"
+                loading="lazy"
+                src={facetedSingleAxisRouting}
+                width="1920"
+              />
+              <figcaption>结构取舍：单一场景轴负责层级定位，正交分面在运行时相交完成 SKU 收口</figcaption>
             </figure>
           </section>
 
