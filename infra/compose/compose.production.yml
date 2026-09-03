@@ -29,7 +29,8 @@ services:
 
   personal-web:
     build:
-      context: ../../apps/personal-website
+      context: ../..
+      dockerfile: apps/personal-website/Dockerfile
     image: ${PERSONAL_WEB_IMAGE:-wdcode/personal-web:local}
     restart: unless-stopped
     expose:
