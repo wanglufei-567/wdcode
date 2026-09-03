@@ -76,6 +76,7 @@ Caddy routes
 - `DebrisRecord` 提供独立维护的 **Markdown**、目录和图片
 - `infra` 在当前运行机器克隆或更新内容仓库，并以只读目录挂载给个人站
 - 个人站通过 **Nginx JSON Autoindex** 读取目录，通过 `ReactMarkdown` 按需渲染原文
-- `SQLEditor` 提供独立维护的业务源码、自动化测试、构建与 **GitHub Pages** 演示，作品模块只保存展示投影
+- `SQLEditor` 提供独立维护的业务源码、自动化测试、构建与 **GitHub Pages** 演示，工程实践模块只保存展示投影
+- `Flowlyte` 提供独立维护的原生 macOS 源码、资源、测试、构建脚本与 **GitHub Release**，工程实践模块只保存展示投影
 - `fund-watchtower` 提供 Web 网关与 API 镜像及其端口、健康检查、环境变量和数据目录契约
 - `infra` 选择外部镜像版本，并定向构建 `wdcode` 自有应用
